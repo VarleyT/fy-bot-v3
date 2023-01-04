@@ -1,0 +1,10 @@
+cache
+.idea
+target
+src/test
+device.json
+*.iml
+
+**/META-INF
+*.bot
+application-*.yaml
