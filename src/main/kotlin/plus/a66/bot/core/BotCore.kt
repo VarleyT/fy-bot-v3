@@ -7,7 +7,7 @@ import org.ktorm.database.Database
 import org.ktorm.entity.forEach
 import org.ktorm.entity.sequenceOf
 import org.springframework.stereotype.Component
-import plus.a66.bot.core.entity.GroupBootStatusE
+import plus.a66.bot.core.entity.GroupBootStatusTbl
 import java.util.*
 
 /**
@@ -25,7 +25,7 @@ class BotCore(
 
     private fun initBootMap() {
         BootMap = HashMap()
-        database.sequenceOf(GroupBootStatusE).forEach {
+        database.sequenceOf(GroupBootStatusTbl).forEach {
             BootMap[it.groupCode] = it.status
         }
     }

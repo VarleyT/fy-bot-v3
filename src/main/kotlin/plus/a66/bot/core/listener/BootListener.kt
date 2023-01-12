@@ -17,10 +17,10 @@ import plus.a66.bot.core.BotCore
 import plus.a66.bot.core.annotation.BotListener
 import plus.a66.bot.core.common.Permission
 import plus.a66.bot.core.common.Sender.Companion.send
-import plus.a66.bot.core.entity.GroupBootStatusE
+import plus.a66.bot.core.entity.GroupBootStatusTbl
 import plus.a66.bot.core.entity.groupBootStatus
-import plus.a66.bot.core.util.SimbotUtil.code
-import plus.a66.bot.core.util.SimbotUtil.minus
+import plus.a66.bot.core.util.SimbootUtil.code
+import plus.a66.bot.core.util.SimbootUtil.minus
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -148,9 +148,9 @@ class BootListener(
     }
 
     private fun changeBootStatus(groupCode: Long, changedStatus: Boolean): String? {
-        val bootStatus = database.groupBootStatus.find { GroupBootStatusE.groupCode eq groupCode }
+        val bootStatus = database.groupBootStatus.find { GroupBootStatusTbl.groupCode eq groupCode }
         if (changedStatus xor (bootStatus ?: return "未在数据库中找到群信息").status) {
-            database.update(GroupBootStatusE) {
+            database.update(GroupBootStatusTbl) {
                 set(it.status, changedStatus)
                 where {
                     it.groupCode eq groupCode

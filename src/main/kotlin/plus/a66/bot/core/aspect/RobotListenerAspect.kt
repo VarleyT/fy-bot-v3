@@ -16,7 +16,7 @@ import plus.a66.bot.core.BotCore
 import plus.a66.bot.core.annotation.BotListener
 import plus.a66.bot.core.common.Permission
 import plus.a66.bot.core.config.BotConfig
-import plus.a66.bot.core.util.SimbotUtil.code
+import plus.a66.bot.core.util.SimbootUtil.code
 
 /**
  * @author VarleyT

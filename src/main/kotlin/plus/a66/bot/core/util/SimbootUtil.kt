@@ -10,7 +10,7 @@ import java.util.*
  * @author VarleyT
  * @date 2023/1/3
  */
-object SimbotUtil {
+object SimbootUtil {
     val Group.code: Long get() = this.id.tryToLong()
     val Friend.code: Long get() = this.id.tryToLong()
     val Member.code: Long get() = this.id.tryToLong()

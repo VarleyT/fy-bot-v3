@@ -13,16 +13,23 @@ import org.ktorm.schema.long
  * @date 2023/1/2
  */
 interface GroupBootStatus : Entity<GroupBootStatus> {
+    /**
+     * 序号
+     */
     val id: Int
 
-    // 群号
+    /**
+     * 群号
+     */
     val groupCode: Long
 
-    // 状态
+    /**
+     * 状态
+     */
     val status: Boolean
 }
 
-object GroupBootStatusE : Table<GroupBootStatus>("group_status") {
+object GroupBootStatusTbl : Table<GroupBootStatus>("group_status") {
     val id = int("id")
         .primaryKey()
         .bindTo { it.id }
@@ -32,4 +39,4 @@ object GroupBootStatusE : Table<GroupBootStatus>("group_status") {
         .bindTo { it.status }
 }
 
-val Database.groupBootStatus get() = this.sequenceOf(GroupBootStatusE)
+val Database.groupBootStatus get() = this.sequenceOf(GroupBootStatusTbl)
