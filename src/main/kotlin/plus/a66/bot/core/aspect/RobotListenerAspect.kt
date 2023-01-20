@@ -60,7 +60,7 @@ class RobotListenerAspect(
             // 权限检查
             if (annotation.permission != Permission.MEMBER) {
                 val role = runBlocking { author.roles.toList()[0] }
-                if (annotation.permission > role && author.code != botConfig.admin) {
+                if (author.code != botConfig.admin && annotation.permission > role) {
                     runBlocking { group.send("权限不足") }
                     return null
                 }

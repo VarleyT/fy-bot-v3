@@ -8,6 +8,7 @@ import org.ktorm.entity.forEach
 import org.ktorm.entity.sequenceOf
 import org.springframework.stereotype.Component
 import plus.a66.bot.core.entity.GroupBootStatusTbl
+import java.io.File
 import java.util.*
 
 /**
@@ -33,7 +34,9 @@ class BotCore(
     companion object {
         lateinit var BootMap: MutableMap<Long, Boolean>
 
-        val StartTime: Date = Date()
+        val START_TIME: Date = Date()
+
+        val TEMP_PATH = System.getProperty("java.io.tmpdir") + File.separator + "fy-bot" + File.separator
 
         @OptIn(FragileSimbotApi::class)
         fun getBot(): Bot {

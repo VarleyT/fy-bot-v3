@@ -123,7 +123,7 @@ class BootListener(
                 append("【状态】\n")
                 append("当前群：${group.name}(${group.code})\n")
                 append("BOT状态：${if (flag) "已启动" else "已关闭"}\n")
-                append("运行时间：${BotCore.StartTime - Date()}")
+                append("运行时间：${BotCore.START_TIME - Date()}")
                 send(event, toString())
             }
         } else if (event is FriendMessageEvent) {
