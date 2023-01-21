@@ -11,7 +11,7 @@
     </parent>
     <groupId>plus.a66</groupId>
     <artifactId>fy-bot-v3</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>fy-bot-v3</name>
     <description>fy-bot-v3</description>
     <properties>
