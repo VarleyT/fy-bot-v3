@@ -1,9 +1,11 @@
 package plus.a66.bot.core.common
 
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeoutOrNull
 import love.forte.di.annotation.Beans
+import love.forte.simbot.Api4J
 import love.forte.simbot.ID
 import love.forte.simbot.action.SendSupport
 import love.forte.simbot.component.mirai.SimbotMiraiMessageReceipt
@@ -361,6 +363,28 @@ fun MessageEvent.send(messages: Any, separator: String = "") = runBlocking {
 }
 
 /**
+ * 发送消息并撤回
+ * @see Sender.send
+ * @param messages 要发送的消息
+ * @param timeout 超时撤回的时间 单位：秒
+ */
+@Suppress("unused")
+fun MessageEvent.sendWithRecall(timeout: Int, messages: Any) = runBlocking {
+    return@runBlocking Sender.send(this@sendWithRecall, messages, "")?.run {
+        delay(timeout * 1000L)
+        delete()
+    }
+}
+
+/**
+ * 发送消息并撤回 默认：10秒
+ * @see Sender.send
+ * @param messages 要发送的消息
+ */
+@Suppress("unused")
+fun MessageEvent.sendWithRecall(messages: Any) = sendWithRecall(timeout = 10, messages)
+
+/**
  * 获取消息id,用于等待下一条消息的标识
  */
 suspend fun MessageEvent.getId(): String = when (this) {
@@ -368,3 +392,14 @@ suspend fun MessageEvent.getId(): String = when (this) {
     is FriendMessageEvent -> "message-${friend().id}"
     else -> ""
 }
+
+@OptIn(Api4J::class)
+fun GroupMessageEvent.sendAsync(message: Message) = this.group.sendAsync(message)
+
+@Suppress("unused")
+@OptIn(Api4J::class)
+fun GroupMessageEvent.sendAsync(text: String) = this.group.sendAsync(text)
+
+@Suppress("unused")
+@OptIn(Api4J::class)
+fun GroupMessageEvent.sendAsync(message: MessageContent) = this.group.sendAsync(message)

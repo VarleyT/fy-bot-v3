@@ -17,8 +17,8 @@
     <properties>
         <java.version>1.8</java.version>
         <kotlin.version>1.8.0</kotlin.version>
-        <simboot.version>3.0.0-RC</simboot.version>
-        <mirai.version>3.0.0.0-beta.6</mirai.version>
+        <simboot.version>3.0.0-RC.2</simboot.version>
+        <mirai.version>3.0.0.0-M4</mirai.version>
     </properties>
 
     <dependencies>
@@ -31,7 +31,7 @@
         <!--        mirai组件-->
         <dependency>
             <groupId>love.forte.simbot.component</groupId>
-            <artifactId>simbot-component-mirai-boot</artifactId>
+            <artifactId>simbot-component-mirai-core</artifactId>
             <version>${mirai.version}</version>
             <exclusions>
                 <exclusion>
