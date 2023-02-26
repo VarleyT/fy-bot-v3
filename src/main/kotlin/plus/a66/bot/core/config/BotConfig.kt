@@ -16,5 +16,11 @@ class BotConfig {
 
     class API {
         lateinit var douyin: String
+        var genshin: Genshin? = null
+    }
+
+    class Genshin {
+        lateinit var api: String
+        lateinit var authorization: String
     }
 }

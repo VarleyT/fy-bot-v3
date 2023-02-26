@@ -1,7 +1,7 @@
 package plus.a66.bot.core.annotation
 
 import love.forte.simboot.annotation.Listener
-import plus.a66.bot.core.common.Permission
+import plus.a66.bot.core.Permission
 import java.util.concurrent.TimeUnit
 
 /**

@@ -1,4 +1,4 @@
-package plus.a66.bot.core.common
+package plus.a66.bot.core.util
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay

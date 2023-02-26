@@ -1,4 +1,4 @@
-package plus.a66.bot.core.common
+package plus.a66.bot.core
 
 import love.forte.simbot.definition.Role
 

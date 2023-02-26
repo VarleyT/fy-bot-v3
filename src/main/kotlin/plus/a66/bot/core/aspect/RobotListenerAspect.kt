@@ -13,8 +13,8 @@ import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.springframework.stereotype.Component
 import plus.a66.bot.core.BotCore
+import plus.a66.bot.core.Permission
 import plus.a66.bot.core.annotation.BotListener
-import plus.a66.bot.core.common.Permission
 import plus.a66.bot.core.config.BotConfig
 import plus.a66.bot.core.util.SimbootUtil.code
 

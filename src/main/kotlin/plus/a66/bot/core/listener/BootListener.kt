@@ -14,11 +14,11 @@ import org.ktorm.dsl.update
 import org.ktorm.entity.find
 import org.springframework.stereotype.Component
 import plus.a66.bot.core.BotCore
+import plus.a66.bot.core.Permission
 import plus.a66.bot.core.annotation.BotListener
-import plus.a66.bot.core.common.Permission
-import plus.a66.bot.core.common.Sender.Companion.send
 import plus.a66.bot.core.entity.GroupBootStatusTbl
 import plus.a66.bot.core.entity.groupBootStatus
+import plus.a66.bot.core.util.Sender.Companion.send
 import plus.a66.bot.core.util.SimbootUtil.code
 import plus.a66.bot.core.util.SimbootUtil.minus
 import java.util.*
@@ -51,7 +51,7 @@ class BootListener(
                 """
                     【状态】
                     当前群：${group.name}(${group.code})
-                    BOT状态：已启动
+                    BOT状态：已开启
                     操作者：${event.author.username}(${event.author.code})
                 """.trimIndent()
             ).also { return }

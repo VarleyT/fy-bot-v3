@@ -26,3 +26,6 @@ bot:
   admin: ${administrator}
   api:
     douyin: ${myapi.douyin}
+    genshin:
+      api: "https://www.theresa3rd.cn:8080/api"
+      authorization: ${myapi.genshin-authorization}
