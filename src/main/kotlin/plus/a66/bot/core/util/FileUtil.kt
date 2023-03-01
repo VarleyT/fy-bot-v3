@@ -3,7 +3,6 @@ package plus.a66.bot.core.util
 import cn.hutool.core.img.ImgUtil
 import cn.hutool.core.io.FileUtil
 import cn.hutool.crypto.digest.MD5
-import cn.hutool.http.HttpUtil
 import plus.a66.bot.core.BotCore
 import java.io.File
 import javax.imageio.ImageIO
@@ -15,9 +14,9 @@ import javax.imageio.ImageIO
 object FileUtil {
 
     fun String.saveAsTempFile(fileType: FileType): File {
-        val response = HttpUtil.createGet(this)
-            .setFollowRedirects(false)
-            .execute()
+        val response = BotHttpUtil.get(this) {
+            setFollowRedirects(false)
+        }
         val bytes = response.bodyBytes()
         val stream = response.bodyStream()
         val file = FileUtil.file(getTempPath(MD5().digestHex16(this) + fileType.VALUE))

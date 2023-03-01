@@ -1,5 +1,7 @@
 package plus.a66.bot.entertainment.dto
 
+import java.io.Serializable
+
 /**
  * @author VarleyT
  * @date 2023/2/25
@@ -21,4 +23,4 @@ data class GenshinPrayGood(
      * 稀有类型
      */
     val rareType: String
-)
+) : Serializable

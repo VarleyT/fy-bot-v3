@@ -4,7 +4,6 @@ import cn.hutool.cache.CacheUtil
 import cn.hutool.cache.impl.FIFOCache
 import cn.hutool.core.util.ReUtil
 import cn.hutool.http.HttpStatus
-import cn.hutool.http.HttpUtil
 import com.alibaba.fastjson2.JSON
 import com.alibaba.fastjson2.JSONObject
 import kotlinx.coroutines.launch
@@ -18,6 +17,7 @@ import love.forte.simbot.message.*
 import org.springframework.stereotype.Component
 import plus.a66.bot.core.annotation.BotListener
 import plus.a66.bot.core.config.BotConfig
+import plus.a66.bot.core.util.BotHttpUtil
 import plus.a66.bot.core.util.SimbootUtil.code
 import plus.a66.bot.core.util.SimbootUtil.toImage
 import plus.a66.bot.core.util.sendAsync
@@ -56,9 +56,9 @@ class GroupListener(
             }
             return
         }
-        val response = HttpUtil.createPost(botConfig.api!!.douyin)
-            .body(JSON.toJSONString(mapOf("url" to url)))
-            .execute()
+        val response = BotHttpUtil.post(botConfig.api!!.douyin) {
+            body(JSON.toJSONString(mapOf("url" to url)))
+        }
         when (response.status) {
             HttpStatus.HTTP_OK -> {
                 try {

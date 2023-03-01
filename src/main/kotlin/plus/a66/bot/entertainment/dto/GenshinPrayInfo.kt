@@ -1,6 +1,8 @@
 package plus.a66.bot.entertainment.dto
 
-import com.alibaba.fastjson2.JSONObject
+import com.alibaba.fastjson2.JSON
+import com.alibaba.fastjson2.toList
+import java.io.Serializable
 
 /**
  * @author VarleyT
@@ -70,21 +72,30 @@ data class GenshinPrayInfo(
     /**
      * 本次祈愿获取的3星物品列表
      */
-    val star3Goods: List<JSONObject>,
+    var star3Goods: List<GenshinPrayGood>,
     /**
      * 本次祈愿获取的4星物品列表
      */
-    val star4Goods: List<JSONObject>,
+    var star4Goods: List<GenshinPrayGood>,
     /**
      * 本次祈愿获取的5星物品列表
      */
-    val star5Goods: List<JSONObject>,
+    var star5Goods: List<GenshinPrayGood>,
     /**
      * 当前蛋池中的4星UP列表
      */
-    val star4Up: List<JSONObject>,
+    var star4Up: List<GenshinPrayGood>,
     /**
      * 当前蛋池中的5星UP列表
      */
-    val star5Up: List<JSONObject>
-)
+    var star5Up: List<GenshinPrayGood>
+) : Serializable {
+    init {
+        // Fastjson 不支持二层解析 需要手动进行解析
+        star3Goods = JSON.parseArray(star3Goods.toString()).toList<GenshinPrayGood>()
+        star4Goods = JSON.parseArray(star4Goods.toString()).toList<GenshinPrayGood>()
+        star5Goods = JSON.parseArray(star5Goods.toString()).toList<GenshinPrayGood>()
+        star4Up = JSON.parseArray(star4Up.toString()).toList<GenshinPrayGood>()
+        star5Up = JSON.parseArray(star5Up.toString()).toList<GenshinPrayGood>()
+    }
+}

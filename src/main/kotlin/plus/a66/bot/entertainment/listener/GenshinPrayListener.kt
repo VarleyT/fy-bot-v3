@@ -1,6 +1,5 @@
 package plus.a66.bot.entertainment.listener
 
-import cn.hutool.http.HttpUtil
 import com.alibaba.fastjson2.JSON
 import com.alibaba.fastjson2.to
 import love.forte.simboot.annotation.Filter
@@ -12,13 +11,14 @@ import love.forte.simbot.event.GroupMessageEvent
 import org.springframework.stereotype.Component
 import plus.a66.bot.core.annotation.BotListener
 import plus.a66.bot.core.config.BotConfig
+import plus.a66.bot.core.util.BotHttpUtil
+import plus.a66.bot.core.util.BotHttpUtil.param
 import plus.a66.bot.core.util.SimbootUtil.code
 import plus.a66.bot.core.util.SimbootUtil.toImage
 import plus.a66.bot.core.util.send
 import plus.a66.bot.core.util.sendWithRecall
 import plus.a66.bot.entertainment.constant.GenshinPrayType
 import plus.a66.bot.entertainment.constant.GenshinPrayType.*
-import plus.a66.bot.entertainment.dto.GenshinPrayGood
 import plus.a66.bot.entertainment.dto.GenshinPrayInfo
 
 /**
@@ -80,7 +80,7 @@ class GenshinPrayListener(
                 bot.says(
                     """
                     恭喜你获得了5星[${
-                        prayInfo.star5Goods.map { it.to<GenshinPrayGood>() }.joinToString("&") { it.goodsName }
+                        prayInfo.star5Goods.joinToString("&") { it.goodsName }
                     }]！真是羡煞旁人！
                     本轮祈愿共计消耗道具*${prayInfo.star5Cost}
                 """.trimIndent()
@@ -90,7 +90,7 @@ class GenshinPrayListener(
             }
             bot.says(
                 """
-                当前祈愿池：${prayInfo.star5Up.map { it.to<GenshinPrayGood>() }.joinToString("&") { it.goodsName }}
+                当前祈愿池：${prayInfo.star5Up.joinToString("&") { it.goodsName }}
                 本次消耗道具：*${prayInfo.prayCount}
                 距离保底剩余${surplus}抽
             """.trimIndent()
@@ -101,17 +101,12 @@ class GenshinPrayListener(
     private fun pray(member: Member, prayType: GenshinPrayType, isTen: Boolean): GenshinPrayInfo? {
         val api = botConfig.api?.genshin?.api
         val authorization = botConfig.api?.genshin?.authorization
-        val request = HttpUtil.createGet(
-            api + prayType.VALUE +
-                    if (isTen) {
-                        PRAY_TEN.VALUE
-                    } else {
-                        PRAY_ONE.VALUE
-                    }
-                    + "?memberCode=${member.code}&memberName=${member.username}"
-        )
-            .header("authorzation", authorization)
-        val response = request.execute()
+        val url = api + prayType.VALUE + if (isTen) PRAY_TEN.VALUE else PRAY_ONE.VALUE
+        val response = BotHttpUtil.get(url) {
+            param("memberCode", member.code)
+            param("memberName", member.username)
+            header("authorzation", authorization)
+        }
         if (response.isOk) {
             return JSON.parseObject(response.body()).to<GenshinPrayInfo>("data")
         }
