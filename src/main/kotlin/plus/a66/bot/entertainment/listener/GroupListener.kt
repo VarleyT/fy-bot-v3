@@ -11,6 +11,7 @@ import love.forte.simboot.annotation.Filter
 import love.forte.simboot.annotation.FilterValue
 import love.forte.simboot.filter.MatchType
 import love.forte.simbot.Api4J
+import love.forte.simbot.component.mirai.event.MiraiNudgeEvent
 import love.forte.simbot.component.mirai.message.buildMiraiForwardMessage
 import love.forte.simbot.event.GroupMessageEvent
 import love.forte.simbot.message.*
@@ -35,7 +36,7 @@ class GroupListener(
 ) {
 
     @Filter(value = "\\d\\.\\d{2} [a-zA-Z]{3}:/.*", matchType = MatchType.REGEX_MATCHES)
-    @BotListener(time = 10, timeUnit = TimeUnit.SECONDS)
+    @BotListener(interval = 10, timeUnit = TimeUnit.SECONDS)
     suspend fun GroupMessageEvent.douyin1() {
         val url = ReUtil.get("https://v\\.douyin\\.com/\\w{7}/", messageContent.plainText, 0)
         if (!url.isNullOrEmpty()) {
@@ -47,7 +48,7 @@ class GroupListener(
     }
 
     @Filter(value = "抖音解析{{videoUrl}}", matchType = MatchType.REGEX_MATCHES)
-    @BotListener(time = 10, timeUnit = TimeUnit.SECONDS)
+    @BotListener(interval = 10, timeUnit = TimeUnit.SECONDS)
     suspend fun GroupMessageEvent.douyin(@FilterValue("videoUrl") videoUrl: String) {
         val url = ReUtil.get("https://v\\.douyin\\.com/\\w{7}/", videoUrl, 0)
         if (url.isNullOrEmpty()) {
@@ -172,7 +173,7 @@ class GroupListener(
     var cache: FIFOCache<Long, Pair<Messages, Boolean>> = CacheUtil.newFIFOCache(30)
 
     @OptIn(Api4J::class)
-    @BotListener(time = 1, timeUnit = TimeUnit.SECONDS)
+    @BotListener(interval = 1, timeUnit = TimeUnit.SECONDS)
     suspend fun GroupMessageEvent.repeat() {
         if (cache.containsKey(group.code)) {
             val value = cache.get(group.code)

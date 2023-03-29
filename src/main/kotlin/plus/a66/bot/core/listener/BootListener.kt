@@ -37,7 +37,7 @@ class BootListener(
 
     @Filter("开机")
     @BotListener(
-        time = 20,
+        interval = 20,
         timeUnit = TimeUnit.SECONDS,
         permission = Permission.ADMINISTRATOR,
         isBoot = false
@@ -72,7 +72,7 @@ class BootListener(
 
     @Filter("关机")
     @BotListener(
-        time = 20,
+        interval = 20,
         timeUnit = TimeUnit.SECONDS,
         permission = Permission.ADMINISTRATOR,
         isBoot = false
@@ -108,9 +108,9 @@ class BootListener(
     @OptIn(Bonus::class)
     @Filter("状态")
     @BotListener(
-        time = 1,
+        interval = 1,
         timeUnit = TimeUnit.MINUTES,
-        count = 2,
+        times = 2,
         permission = Permission.ADMINISTRATOR,
         isBoot = false
     )

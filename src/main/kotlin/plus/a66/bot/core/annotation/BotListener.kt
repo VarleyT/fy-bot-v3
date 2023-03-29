@@ -19,7 +19,7 @@ annotation class BotListener(
      *
      * 默认：3
      */
-    val count: Int = 3,
+    val times: Int = 3,
 
     /**
      * 间隔时长
@@ -28,7 +28,7 @@ annotation class BotListener(
      *
      * 默认：2000
      */
-    val time: Long = 2000,
+    val interval: Long = 2000,
 
     /**
      * 间隔单位

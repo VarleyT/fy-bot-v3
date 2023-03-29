@@ -43,12 +43,12 @@ class RobotListenerAspect(
             val groupCode = event.group.code
             val author = event.author
             // 时限检查
-            if (annotation.time > 0) {
+            if (annotation.interval > 0) {
                 with(expiringMap) {
                     val key = "$groupCode: ${signature.name}"
                     when (val i = get(key)) {
-                        null -> put(key, 1, annotation.time, annotation.timeUnit)
-                        in 1 until annotation.count -> put(key, i + 1)
+                        null -> put(key, 1, annotation.interval, annotation.timeUnit)
+                        in 1 until annotation.times -> put(key, i + 1)
                         else -> return null
                     }
                 }
